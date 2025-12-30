@@ -1,0 +1,24 @@
+/* HAI STYLE - Mng'ao wa Afya (Modern & Vibrant) */
+.card-alive {
+    background: var(--card-alive);
+    border-left: 4px solid #2ea043;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.name-alive {
+    color: #2ea043;
+    font-weight: 800;
+    margin: 0;
+}
+
+.btn-alive {
+    background: #2ea043;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+}

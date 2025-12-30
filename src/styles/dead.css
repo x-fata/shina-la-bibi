@@ -1,0 +1,40 @@
+/* MAREHEMU STYLE - Giza na Dhahabu (Elegant & Respectful) */
+.card-dead {
+    background: var(--card-dead);
+    border-left: 4px solid var(--gold-color);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-dead::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+}
+
+.name-dead {
+    color: var(--gold-color);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin: 0;
+}
+
+.btn-dead {
+    background: transparent;
+    color: var(--gold-color);
+    border: 1px solid var(--gold-color);
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+}

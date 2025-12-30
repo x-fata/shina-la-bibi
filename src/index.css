@@ -1,0 +1,36 @@
+/* GLOBAL SETTINGS - Hatuigusi tena */
+:root {
+    --bg-color: #0b0e14;
+    --card-dead: linear-gradient(145deg, #1e2024, #14161a);
+    --card-alive: linear-gradient(145deg, #1a2a22, #0d1a14);
+    --gold-color: #d4af37;
+    --text-main: #e6edf3;
+    --text-dim: #8b949e;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    background-image: radial-gradient(circle at top right, #161b22, transparent);
+    color: var(--text-main);
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    /* Upana mzuri kwa simu zote */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Decoration za kiprofeshnal */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
