@@ -8,7 +8,10 @@ function MaelezoJumla() {
             </p>
             <div style={{ marginTop: '10px', height: '2px', background: 'linear-gradient(90deg, var(--gold-color), transparent)' }}></div>
             <p style={{ marginTop: '10px', fontSize: '12px', lineHeight: '1.8' }}>
-                Mfumo huu ni kwa ajili ya kuweka kumbukumbu sahihi za kila mwanafamilia kuanzia kwa Bi Saade Bint Hamad mpaka kizazi cha mwisho.
+                Wazee wetu Walisema, Familia ni mzizi wa mti; ukikauka, matawi yote hunyauka.
+                Udugu wa familia hujengwa kwa heshima, subira, na kusameheana. Penye umoja ndipo baraka hukaa.
+                Njaa ikija, hushirikiana; furaha ikija, hushangiria pamoja. Mtu asimdharau ndugu yake,
+                maana kesho njia humrudisha nyumbani. Udugu ni hazina ISIYONUNULIKA,"unga-udugu".
             </p>
         </div>
     );

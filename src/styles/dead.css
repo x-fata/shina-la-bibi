@@ -18,6 +18,8 @@
     width: 200%;
     height: 200%;
     background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    /* MSTARI MUHIMU: Inaruhusu vitufe vilivyochini vigusike */
+    pointer-events: none;
 }
 
 .name-dead {
@@ -37,4 +39,5 @@
     margin-top: 15px;
     font-size: 12px;
     text-transform: uppercase;
+    cursor: pointer;
 }

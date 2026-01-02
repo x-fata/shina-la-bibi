@@ -1,36 +1,131 @@
-/* GLOBAL SETTINGS - Hatuigusi tena */
+/* GLOBAL SETTINGS */
 :root {
     --bg-color: #0b0e14;
-    --card-dead: linear-gradient(145deg, #1e2024, #14161a);
-    --card-alive: linear-gradient(145deg, #1a2a22, #0d1a14);
     --gold-color: #d4af37;
     --text-main: #e6edf3;
-    --text-dim: #8b949e;
+    --nav-green: #1a5d3b;
 }
 
 body {
     margin: 0;
     background-color: var(--bg-color);
-    background-image: radial-gradient(circle at top right, #161b22, transparent);
     color: var(--text-main);
-    font-family: 'Inter', -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
 }
 
 .container {
     width: 100%;
     max-width: 450px;
-    /* Upana mzuri kwa simu zote */
     margin: 0 auto;
-    padding: 20px;
+    padding: 130px 20px 40px 20px;
+    /* Nafasi zaidi juu */
     box-sizing: border-box;
 }
 
-/* Decoration za kiprofeshnal */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+/* TOP HEADER */
+.top-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    height: 95px;
+    padding: 0 20px;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    background: var(--bg-color);
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-wrapper {
+    flex: 1;
+    position: relative;
+    margin-right: 25px;
+    /* Inatenganisha Search na Menu */
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    outline: none;
+}
+
+.menu-trigger {
+    background: none;
+    border: none;
+    color: var(--gold-color);
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* TOAST BOX - Sasa itatokea CHINI ya search bar */
+.toast-box {
+    position: fixed;
+    top: 105px;
+    /* Imeshushwa chini ya header */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    background: var(--gold-color);
+    color: black;
+    text-align: center;
+    min-width: 250px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translate(-50%, -20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 85px;
+    right: 20px;
+    background: #1c2128;
+    border: 1px solid var(--gold-color);
+    border-radius: 12px;
+    width: 180px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    z-index: 2001;
+}
+
+.menu-link {
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #30363d;
+    background: none;
+    border: none;
+    width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu-link:hover {
+    background: #2d333b;
 }

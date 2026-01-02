@@ -1,71 +1,122 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import BoxMwanafamilia from '../components/BoxMwanafamilia';
+import MwanafamiliaForm from '../components/MwanafamiliaForm';
+import { db } from '../firebase';
+import { collection, query, where, onSnapshot } from "firebase/firestore";
 
 function SaadePage() {
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [formMode, setFormMode] = useState('add');
+    const [selectedParentId, setSelectedParentId] = useState('SAADE_ROOT');
+    const [selectedMember, setSelectedMember] = useState(null);
+    const [waumeWapya, setWaumeWapya] = useState([]);
+
+    // Logic ya Read More
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    useEffect(() => {
+        const q = query(collection(db, "wanachama"), where("parentId", "==", "SAADE_ROOT"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const data = [];
+            querySnapshot.forEach((doc) => {
+                data.push({ id: doc.id, ...doc.data() });
+            });
+            setWaumeWapya(data);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const openAddForm = (parentId) => {
+        setSelectedParentId(parentId);
+        setFormMode('add');
+        setSelectedMember(null);
+        setIsFormOpen(true);
+    };
+
+    const openEditForm = (member) => {
+        setSelectedMember(member);
+        setFormMode('edit');
+        setIsFormOpen(true);
+    };
+
+    // Sample ya Historia (Unaweza kuibadilisha baadae)
+    const historiaFull = `Ukoo wa Bisaade una asili ya kipekee inayopatikana katika mizizi ya udugu na upendo. Saade Bint Hamad, akiwa kama shina kuu, alisimama kama mhimili wa hekima na mwongozo kwa kizazi chake. Historia inatueleza kuwa ukoo huu ulianza kupata umaarufu kutokana na juhudi za kilimo na biashara, lakini zaidi sana, kutokana na moyo wa ukarimu ambao Bibi Saade aliuasisi. Kila tawi unaloliona leo ni matokeo ya malezi bora na misingi imara ya kidini na kijamii. Mpaka leo, jina Bisaade linabaki kuwa alama ya umoja, likiunganisha matawi mbalimbali yaliyotanda maeneo mengi, huku yote yakirejea kwenye shina hili moja imara la Bibi Saade. Ni stori ya uvumilivu, mafanikio, na zaidi ya yote, upendo usio na kifani.`;
+
+    const historiaShort = historiaFull.substring(0, 150) + "...";
+
     return (
         <div className="container">
-            {/* Kitufe cha kurudi nyuma */}
-            <Link to="/" style={{ color: 'var(--gold-color)', textDecoration: 'none', fontSize: '12px', fontWeight: 'bold' }}>
-                ← KURUDI HOME
-            </Link>
+            <Link to="/" style={{ color: 'var(--gold-color)', textDecoration: 'none', fontSize: '12px', fontWeight: 'bold' }}>← RUDI MWANZO</Link>
 
-            {/* 1. SEHEMU YA PROFILE YA BIBI (SHINA KUU) */}
-            <div className="card-dead" style={{ marginTop: '15px', textAlign: 'center' }}>
-                <h1 className="name-dead" style={{ fontSize: '1.5rem' }}>SAADE BINT HAMAD</h1>
-                <p style={{ color: 'var(--text-dim)', fontSize: '0.9rem' }}>SHINA KUU</p>
-
-                <div style={{
-                    marginTop: '20px',
-                    textAlign: 'left',
-                    fontSize: '14px',
-                    lineHeight: '1.8',
-                    borderTop: '1px solid rgba(212,175,55,0.2)',
-                    paddingTop: '15px'
-                }}>
-                    <p><strong>MAHALI:</strong> Zanzibar</p>
-                    <p><strong>MAELEZO:</strong> Shina mama la familia hii. Chini yake kuna vizazi vilivyozaliwa kupitia waume watatu (3).</p>
-                </div>
+            {/* Kadi Kuu ya Bibi - Maboksi ya pembeni yameondolewa, imebaki Logo/Jina tu */}
+            <div className="card-dead" style={{ marginTop: '15px', textAlign: 'center', border: '1px solid rgba(212, 175, 55, 0.2)', padding: '30px 15px' }}>
+                <div style={{ fontSize: '50px', marginBottom: '10px' }}>🌿</div> {/* Hapa unaweza kuweka <img> ya Logo yako */}
+                <h1 className="name-dead" style={{ fontSize: '1.8rem', color: 'var(--gold-color)', margin: '0' }}>SAADE BINT HAMAD</h1>
+                <p style={{ color: '#888', fontSize: '0.9rem', letterSpacing: '2px' }}>SHINA KUU LA UKOO</p>
+                <button onClick={() => openAddForm('SAADE_ROOT')} style={btnOngezaMain}> ONGEZA MUME/TAWI + </button>
             </div>
 
-            {/* 2. SEHEMU YA WAUME (KILA MUME NI LANGO LA WATOTO WAKE) */}
-            <div style={{ marginTop: '30px' }}>
-                <h3 style={{
-                    fontSize: '0.9rem',
-                    letterSpacing: '2px',
-                    color: 'var(--gold-color)',
-                    borderBottom: '1px solid #30363d',
-                    paddingBottom: '10px',
-                    marginBottom: '20px'
-                }}>
-                    WAUME ZAKE SAADE (SHINA)
+            {/* SEHEMU MPYA: HISTORIA YA UKOO WA BISAADE */}
+            <div style={{ marginTop: '25px', background: '#161b22', padding: '20px', borderRadius: '15px', border: '1px solid #30363d' }}>
+                <h3 style={{ color: 'var(--gold-color)', fontSize: '1rem', marginTop: '0', borderBottom: '1px solid #333', paddingBottom: '10px' }}>
+                    HISTORIA YA UKOO WA BISAADE
                 </h3>
-
-                {/* Kila mume sasa ana LINK yake maalum kuelekea kwa watoto wake */}
-                <BoxMwanafamilia
-                    jina="OMAR BIN ALY"
-                    hali="marehemu"
-                    link="/omar-aly"
-                />
-
-                <BoxMwanafamilia
-                    jina="YUSSUF BIN KHAMIS"
-                    hali="marehemu"
-                    link="/yussuf-khamis"
-                />
-
-                <BoxMwanafamilia
-                    jina="OMAR BIN MUSSA"
-                    hali="marehemu"
-                    link="/omar-mussa"
-                />
+                <p style={{ fontSize: '14px', lineHeight: '1.6', color: '#e6edf3', textAlign: 'justify' }}>
+                    {isExpanded ? historiaFull : historiaShort}
+                </p>
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    style={{ background: 'none', border: 'none', color: 'var(--gold-color)', fontWeight: 'bold', cursor: 'pointer', padding: '0', fontSize: '13px' }}
+                >
+                    {isExpanded ? "Onyesha kidogo ↑" : "Soma zaidi ↓"}
+                </button>
             </div>
 
-            <p style={{ marginTop: '40px', fontSize: '11px', color: 'var(--text-dim)', textAlign: 'center' }}>
-                Bonyeza mume kuona watoto aliowazaa na Bibi Saade.
-            </p>
+            {/* Orodha ya Waume/Matawi */}
+            <div style={{ marginTop: '35px' }}>
+                <h3 style={{ fontSize: '0.9rem', color: 'var(--gold-color)', borderBottom: '1px solid #30363d', paddingBottom: '10px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                    Waume & Matawi ya Saade
+                </h3>
+                {waumeWapya.length === 0 ? (
+                    <p style={{ textAlign: 'center', color: '#666', marginTop: '20px' }}>Hakuna tawi lililosajiliwa bado.</p>
+                ) : (
+                    waumeWapya.map((mme) => (
+                        <BoxMwanafamilia
+                            key={mme.id}
+                            jina={mme.jina}
+                            hali={mme.hali}
+                            jinsia={mme.jinsia}
+                            link={`/member/${mme.id}`}
+                            onAdd={() => openAddForm(mme.id)}
+                            onEdit={() => openEditForm(mme)}
+                        />
+                    ))
+                )}
+            </div>
+
+            <MwanafamiliaForm
+                isOpen={isFormOpen}
+                onClose={() => setIsFormOpen(false)}
+                parentId={selectedParentId}
+                existingData={selectedMember}
+                mode={formMode}
+            />
         </div>
     );
 }
+
+const btnOngezaMain = {
+    marginTop: '20px',
+    background: 'var(--gold-color)',
+    border: 'none',
+    borderRadius: '8px',
+    padding: '10px 25px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    color: 'black',
+    fontSize: '13px',
+    boxShadow: '0 4px 15px rgba(212, 175, 55, 0.2)'
+};
 
 export default SaadePage;
