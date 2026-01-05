@@ -18,7 +18,6 @@ body {
     max-width: 450px;
     margin: 0 auto;
     padding: 130px 20px 40px 20px;
-    /* Nafasi zaidi juu */
     box-sizing: border-box;
 }
 
@@ -44,7 +43,6 @@ body {
     flex: 1;
     position: relative;
     margin-right: 25px;
-    /* Inatenganisha Search na Menu */
 }
 
 .search-input {
@@ -66,11 +64,10 @@ body {
     padding: 10px;
 }
 
-/* TOAST BOX - Sasa itatokea CHINI ya search bar */
+/* TOAST BOX */
 .toast-box {
     position: fixed;
     top: 105px;
-    /* Imeshushwa chini ya header */
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
@@ -128,4 +125,67 @@ body {
 
 .menu-link:hover {
     background: #2d333b;
+}
+
+/* REACTION BUTTONS STYLE */
+.reaction-container {
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.react-btn {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 2px 5px;
+}
+
+.react-btn span {
+    font-size: 12px;
+    color: var(--text-main);
+    font-weight: bold;
+}
+
+/* RANGI ZIKIBONYEZWA (Sheria zako) */
+.active-like {
+    color: var(--gold-color) !important;
+    transform: scale(1.2);
+}
+
+.active-unlike {
+    color: #ff4444 !important;
+    transform: scale(1.2);
+}
+
+.active-love {
+    color: #ff3e3e !important;
+    transform: scale(1.3);
+    animation: heartPop 0.3s ease-out;
+}
+
+@keyframes heartPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.6);
+    }
+
+    100% {
+        transform: scale(1.3);
+    }
+}
+
+.react-btn:hover {
+    opacity: 0.8;
 }
